@@ -15,6 +15,9 @@ class Projet extends Model
     public function evaluation_financieres(){
         return $this->hasMany(EvaluationFinanciere::class);
     }
+    public function phases(){
+        return $this->hasMany(PhaseProjet::class);
+    }
     public function porteur(){
         return $this->belongsTo(PersonnePhysique::class, 'personne_id');
     }

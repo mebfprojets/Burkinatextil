@@ -138,11 +138,8 @@ class InscrireController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
-
         $projet=Projet::where('personne_id', $request->personne)->first();
         if(!$projet){
-
         $produits=$request->produits;
         $categories=$request->categorie;
         $activites=$request->activite;

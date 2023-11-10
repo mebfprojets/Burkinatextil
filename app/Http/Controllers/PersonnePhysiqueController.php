@@ -106,7 +106,7 @@ if($request->hasFile('docidentite') && $request->hasFile('formulaire_de_souscrip
         $emplacement='public/docidentification';
         $extension=$file->getClientOriginalExtension();
         $fileName = $personnephysique->id.'-'.'docidentification'.'.'.$extension;
-        $file_url= $request['formulaire_de_souscription']->storeAs($emplacement, $fileName);
+        $file_url= $request['docidentite']->storeAs($emplacement, $fileName);
       //$urldocidentite= $request->docidentite->store('public/docidentification');
       Piecejointe::create([
           'type_piece'=>env("VALEUR_ID_DOCUMENT_IDENTITE"),

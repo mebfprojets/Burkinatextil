@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Valeur;
+use App\Models\Projet;
 if (!function_exists('getlibelle')) {
     function getlibelle($id)
         {
@@ -63,6 +64,28 @@ if (!function_exists('getlibelle')) {
                 $file_url= $request[$champName]->storeAs($emplacement, $fileName); 
                 return $file_url;
             }
+            
+        }
+        if(!function_exists('return_chiffre_daffaire')){
+            function return_chiffre_daffaire($id){
+                $ca_prev=0;
+                $projet= Projet::find($id);
+                foreach($projet->chiffre_daffaire_previsionnels as $ca){
+                    $ca_prev += $ca->quantite *  $ca->cout_unit;
+                }
+                return $ca_prev;
+            } 
+        }
+        if(!function_exists('return_cout_du_projet')){
+            function return_cout_du_projet($id){
+                $ca_prev=0;
+                $projet= Projet::find($id);
+                foreach($projet->evaluation_financieres as $eval_fin){
+                    $ca_prev += $eval_fin->quantite *  $eval_fin->cout_unit;
+                }
+                return $ca_prev;
+            }
+           
             
         }
 

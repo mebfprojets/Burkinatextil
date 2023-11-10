@@ -9,7 +9,7 @@
     <li><a href="">Détails</a></li>
 @endsection
 @section('content')
-            <div class=" col-xs-10 block-content ">
+            <div class=" col-xs-11 block-content ">
                 {{-- @if($entreprise->conforme== null)
                 @can('avisqualitative_ugp', Auth::user())
                     <a href="#modal-confirm-ugp" data-toggle="modal" onclick="recupererentreprise_id({{$entreprise->id}}, 2)" title="non conforme" class="btn btn-md btn-warning">Non conforme<i class="gi gi-remove_2"></i></a>
@@ -49,7 +49,7 @@
                             <div class="tab-pane active" id="example-tabs2-activity" style="height:100%;background: #fff">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div  id="condanation" class="form-group ">
+                                        <div  id="condanation" class="form-group row">
                                             <p class="col-md-4 control-label labdetail"> <span class="labdetail">Code Personne: </span> </p>
                                             <p class="col-md-6" >
                                             <span class="valdetail">
@@ -60,7 +60,7 @@
                                             </span>
                                         </p>
                                     </div>
-                                        <div  id="condanation" class="form-group ">
+                                        <div  id="condanation" class="form-group row">
                                             <p class="col-md-4 control-label labdetail"> <span class="labdetail">Nom & prénom: </span> </p>
                                             <p class="col-md-6" >
                                             <span class="valdetail">
@@ -97,6 +97,16 @@
                                             {{format_date($projet->porteur->date_naissance)}}
                                     </span></p>
                                     </div>
+                                    <div  id="condanation" class="form-group row" >
+                                        <p class="col-md-4 control-label labdetail"> <span >Lieu de naissance : </span> </p>
+                                        <p class="col-md-6" >
+                                        <span class="valdetail">
+                                            @empty($projet->porteur->lieu_naissance)
+                                                    Informations non disponible
+                                                    @endempty
+                                            {{$projet->porteur->lieu_naissance}}
+                                    </span></p>
+                                    </div>
 
                                 <div  id="condanation" class="form-group row">
                                     <p class="col-md-4 control-label labdetail"><span class=""> Niveau d'instruction : </span> </p>
@@ -108,85 +118,125 @@
                                                     {{getlibelle($projet->porteur->niveau_instruction)}}
                                     </span></p>
                                 </div>
-                                <div  id="condanation" class="form-group row " >
-                                    <p class="col-md-4 control-label"> <span class="labdetail">Activité : </span></p>
-                                    <p class="col-md-6" >
+                                <div  id="condanation" class="form-group row">
+                                    <p class="col-md-4 control-label labdetail"><span class="">Type de contrat: </span> </p>
+                                        <p class="col-md-6" >
                                         <span class="valdetail">
-                                        @empty($projet->porteur->activite)
+                                        @empty($projet->porteur->type_contrat)
                                                     Informations non disponible
                                                     @endempty
-                                            {{$projet->porteur->activite}}
+                                                    {{getlibelle($projet->porteur->type_contrat)}}
+                                    </span></p>
+                                </div>
+                                <div  id="condanation" class="form-group row " >
+                                    <p class="col-md-4 control-label"> <span class="labdetail">Nationalité : </span></p>
+                                    <p class="col-md-6" >
+                                        <span class="valdetail">
+                                        @empty($projet->porteur->nationalite)
+                                                    Informations non disponible
+                                                    @endempty
+                                            {{getlibelle($projet->porteur->nationalite)}}
                                     </span>
                                 </p>
                                 </div>
-                            @if($projet->porteur->type_personne=='M')
                                 <div  id="condanation" class="form-group row " >
-                                    <p class="col-md-4 control-label"> <span class="labdetail">Fonction représentant : </span></p>
+                                    <p class="col-md-4 control-label"> <span class="labdetail">Pays de residence : </span></p>
                                     <p class="col-md-6" >
                                         <span class="valdetail">
-                                        @empty($projet->porteur->fonction_representant )
+                                        @empty($projet->porteur->pays_de_residence)
                                                     Informations non disponible
-                                                    @endempty
-                                            {{$projet->porteur->fonction_representant }}
+                                        @endempty
+                                            {{getlibelle($projet->porteur->pays_de_residence)}}
                                     </span>
                                 </p>
                                 </div>
-                            @endif
+                            
                                 <div  id="condanation" class="form-group row" >
-                                    <p class="col-md-4 control-label"> <span class="labdetail">Expérience : </span> </p>
+                                    <p class="col-md-4 control-label"> <span class="labdetail">Niveau d'instruction : </span> </p>
                                     <p class="col-md-6" >
                                         <span class="valdetail">
-                                        @empty($projet->porteur->experience)
+                                        @empty($projet->porteur->niveau_instruction)
                                                     Informations non disponible
                                                     @endempty
-                                            {{$projet->porteur->experience}}
+                                            {{getlibelle($projet->porteur->niveau_instruction)}}
                                 </span></p>
                                 </div>
                                 <div  id="condanation" class="form-group row" >
-                                    <p class="col-md-4 control-label labdetail"> <span class=""> Région de résidence: </span> </p>
+                                    <p class="col-md-4 control-label"> <span class="labdetail">Statut Professionnel : </span> </p>
                                     <p class="col-md-6" >
-                                    <span class="valdetail">
-                                        @empty($projet->porteur->region_residence )
+                                        <span class="valdetail">
+                                        @empty($projet->porteur->statut_professionnel)
                                                     Informations non disponible
-                                                    @endempty
-                                            {{getlibelle($projet->porteur->region_residence) }}
+                                        @endempty
+                                            {{getlibelle($projet->porteur->statut_professionnel)}}
                                 </span></p>
                                 </div>
-                                <hr>
-
-                                <div  id="condanation" class="form-group row " >
-                                    <p class="col-md-4 control-label labdetail"> <span class="">Province de residence : </span> </p>
-                                    <p class="col-md-6" >
-                                    <span class="valdetail">
-                                        @empty($projet->porteur->province_residence )
-                                                    Informations non disponible
-                                                    @endempty
-                                            {{getlibelle($projet->porteur->province_residence)}}
-                                </span></p>
-                                </div>
-
-                            <div  id="condanation" class="form-group row" >
-                                <p class="col-md-4 control-label labdetail"> <span class="">Commune de residence : </span> </p>
-                                <p class="col-md-6" >
-                                <span class="valdetail">
-                                    @empty($projet->porteur->commune_residence)
-                                                Informations non disponible
-                                                @endempty
-                                        {{getlibelle($projet->porteur->commune_residence)}}
-                            </span></p>
-                            </div>
-                            <div  id="condanation" class="form-group row" >
-                                <p class="col-md-4 control-label labdetail"> <span class="">Secteur/village : </span> </p>
-                                <p class="col-md-6" >
-                                <span class="valdetail">
-                                    @empty($projet->porteur->secteur_residence)
-                                                Informations non disponible
-                                                @endempty
-                                        {{getlibelle($projet->porteur->secteur_residence)}}
-                            </span></p>
-                            </div>
+                                
                         </div>
                     <div class="col-md-6">
+                        <div  id="condanation" class="form-group row" >
+                            <p class="col-md-4 control-label labdetail"> <span class=""> Région de résidence: </span> </p>
+                            <p class="col-md-6" >
+                            <span class="valdetail">
+                                @empty($projet->porteur->region_residence )
+                                            Informations non disponible
+                                            @endempty
+                                    {{getlibelle($projet->porteur->region_residence) }}
+                        </span></p>
+                        </div>
+                        <hr>
+
+                        <div  id="condanation" class="form-group row " >
+                            <p class="col-md-4 control-label labdetail"> <span class="">Province de residence : </span> </p>
+                            <p class="col-md-6" >
+                            <span class="valdetail">
+                                @empty($projet->porteur->province_residence )
+                                            Informations non disponible
+                                            @endempty
+                                    {{getlibelle($projet->porteur->province_residence)}}
+                        </span></p>
+                        </div>
+
+                    <div  id="condanation" class="form-group row" >
+                        <p class="col-md-4 control-label labdetail"> <span class="">Commune de residence : </span> </p>
+                        <p class="col-md-6" >
+                        <span class="valdetail">
+                            @empty($projet->porteur->commune_residence)
+                                        Informations non disponible
+                                        @endempty
+                                {{getlibelle($projet->porteur->commune_residence)}}
+                    </span></p>
+                    </div>
+                    <div  id="condanation" class="form-group row" >
+                        <p class="col-md-4 control-label labdetail"> <span class="">Secteur/village : </span> </p>
+                        <p class="col-md-6" >
+                        <span class="valdetail">
+                            @empty($projet->porteur->secteur_residence)
+                                        Informations non disponible
+                                        @endempty
+                                {{getlibelle($projet->porteur->secteur_residence)}}
+                    </span></p>
+                    </div>
+                        <div  id="" class="form-group row" >
+                            <p class="col-md-4 control-label labdetail"> <span> Téléphone : </span> </p>
+                                <p class="col-md-6" >
+                                <span class="valdetail">
+                                    @empty($projet->porteur->telephone )
+                                    Informations non disponible
+                                    @endempty
+                                    {{$projet->porteur->telephone}}/ {{$projet->porteur->telephone_whatsap}}
+                                </span></p>
+                        </div>
+                        <div  id="" class="form-group row" >
+                            <p class="col-md-4 control-label labdetail"> <span> Email : </span> </p>
+                                <p class="col-md-6" >
+                                <span class="valdetail">
+                                    @empty($projet->porteur->email )
+                                    Informations non disponible
+                                    @endempty
+                                    {{$projet->porteur->email}}
+                                </span></p>
+                        </div>
                         <div  id="" class="form-group row" >
                             <p class="col-md-4 control-label labdetail"> <span> Réf. d'identite : </span> </p>
                                 <p class="col-md-6" >
@@ -212,9 +262,10 @@
                                 </span>
                             </p>
                     </div>
+                    
                     @if($projet->porteur->type_personne=="M")
                     <div  id="" class="form-group row" >
-                            <p class="col-md-6 control-label labdetail"> <span>Raison sociale : </span> </p>
+                            <p class="col-md-4 control-label labdetail"> <span>Raison sociale : </span> </p>
                             <p class="col-md-6">
                             <span class="valdetail">
                                 @empty($projet->porteur->represente->raison_sociale)
@@ -224,97 +275,74 @@
                             </span>
                             </p>
                         </div>
-                        <div  id="" class="form-group">
-                            <p class="col-md-6 control-label labdetail"> <span>Status : </span> </p>
-                            <p class="col-md-6">
-                            <span class="valdetail">
-                                @empty($projet->porteur->represente->statut )
-                                            Informations non disponible
-                                            @endempty
-                                 {{ getlibelle($projet->porteur->represente->statut) }}
-                            </span>
-                            </p>
-                        </div>
-                        <div  id="" class="row form-group row">
-                            <p class="col-md-6 control-label labdetail"> <span>Domaine : </span> </p>
-                            <p class="col-md-6">
-                            <span class="valdetail">
-                                @empty($projet->porteur->represente->domaine )
-                                            Informations non disponible
-                                            @endempty
-                                 {{ $projet->porteur->represente->domaine }}
-                            </span>
-                            </p>
-                        </div>
-                        <div  id="" class="row form-group row">
-                            <p class="col-md-6 control-label labdetail"> <span>Effectif : </span> </p>
-                            <p class="col-md-6">
-                            <span class="valdetail">
-                                @empty($projet->porteur->represente->nombre_homme )
-                                            Informations non disponible
-                                            @endempty
-                                 {{ $projet->porteur->represente->nombre_homme }} hommes, {{ $projet->porteur->represente->nombre_femme  }} femmes et {{ $projet->porteur->represente->nombre_jeune  }} jeunes
-                            </span>
-                            </p>
-                        </div>
-                        <div  id="" class="row form-group row">
-                            <p class="col-md-6 control-label labdetail"> <span>Date de demarrage des activités : </span> </p>
-                            <p class="col-md-6">
-                            <span class="valdetail">
-                                @empty($projet->porteur->represente->date_de_demarage_activite  )
-                                            Informations non disponible
-                                            @endempty
-                                 {{ format_date($projet->porteur->represente->date_de_demarage_activite)  }}
-                            </span>
-                            </p>
-                        </div>
-                        <div  id="" class="row form-group row">
-                            <p class="col-md-6 control-label labdetail"> <span>Numéro de reconnaissance : </span> </p>
-                            <p class="col-md-6">
-                            <span class="valdetail">
-                                @empty($projet->porteur->represente->numero_du_doc_de_reconnaissance  )
-                                            Informations non disponible
-                                            @endempty
-                                 {{ $projet->porteur->represente->numero_du_doc_de_reconnaissance }}
-                            </span>
-                            </p>
-                        </div>
-
-                        <div  id="" class="row form-group row">
-                            <p class="col-md-6 control-label labdetail"> <span>Domaine : </span> </p>
-                            <p class="col-md-6">
-                            <span class="valdetail">
-                                @empty($projet->porteur->represente->domaine )
-                                            Informations non disponible
-                                            @endempty
-                                 {{ $projet->porteur->represente->domaine }}
-                            </span>
-                            </p>
-                        </div>
-                        <div  id="" class="row form-group row">
-                            <p class="col-md-6 control-label labdetail"> <span>Siège : </span> </p>
-                            <p class="col-md-6">
-                            <span class="valdetail">
-                                @empty($projet->porteur->represente->region_siege )
-                                            Informations non disponible
-                                            @endempty
-                                 Region du {{ getlibelle($projet->porteur->represente->region_siege) }}, province du {{ getlibelle($projet->porteur->represente->province_siege) }}, commune du {{ getlibelle($projet->porteur->represente->commune_siege) }}, secteur/village {{ getlibelle($projet->porteur->represente->secteur_siege) }},
-                            </span>
-                            </p>
-                        </div>
-                        <div  id="" class="row form-group row">
-                            <p class="col-md-6 control-label labdetail"> <span>Activité principale : </span> </p>
-                            <p class="col-md-6">
-                            <span class="valdetail">
-                                @empty($projet->porteur->represente->activite_principale  )
-                                            Informations non disponible
-                                            @endempty
-                                 {{ $projet->porteur->represente->activite_principale  }}
-                            </span>
-                            </p>
-                        </div>
+                    @else
+                    <div  id="condanation" class="form-group row" >
+                        <p class="col-md-4 control-label labdetail"> <span class="">Entreprise formalisée? : </span> </p>
+                        <p class="col-md-6" >
+                        <span class="valdetail">
+                            @empty($projet->porteur->entreprise_formalise)
+                                        Informations non disponible
+                                        @endempty
+                            @if($projet->porteur->entreprise_formalise==1)
+                                Oui formalisée le {{ $projet->porteur->date_de_formalisation }}
+                            @else
+                                Non
+                            @endif
+                    </span></p>
+                    </div>
+                    <div  id="condanation" class="form-group row" >
+                        <p class="col-md-4 control-label labdetail"> <span class="">Entreprise formalisée? : </span> </p>
+                        <p class="col-md-6" >
+                        <span class="valdetail">
+                            @empty($projet->porteur->entreprise_formalise)
+                                        Informations non disponible
+                                        @endempty
+                                {{ $projet->porteur->nom_entreprise }}
+                    </span></p>
+                    </div>
                     @endif
                     </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                                <table class="table table-vcenter table-condensed table-bordered">
+                                    <tr>
+                                        <th>Sexe</th>
+                                        <th>Emplois permanent</th>
+                                        <th>Emplois Temploraire</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Homme</td>
+                                        <td>{{ $projet->porteur->nbre_emp_perm_femme }}</td>
+                                        <td>{{ $projet->porteur->nbre_temp_perm_femme}}</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Femme</td>
+                                        <td>{{ $projet->porteur->nbre_emp_perm_femme }}</td>
+                                        <td>{{ $projet->porteur->nbre_temp_perm_homme}}</td>
+
+                                    </tr>
+
+                                </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-vcenter table-condensed table-bordered">
+                                <tr>
+                                    <th>CA 2020</th>
+                                    <th>CA 2021</th>
+                                    <th>CA 2022</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ format_prix($projet->porteur->ca_2020)  }}</td>
+                                    <td>{{ format_prix($projet->porteur->ca_2021)  }}</td>
+                                    <td>{{ format_prix($projet->porteur->ca_2022)  }}</td>
+
+
+                                </tr>
+                            </table>
+                            
+                        </div>
                      </div>
 
                           </div>
@@ -331,26 +359,8 @@
                                                              {{$projet->titre}}
                                                     </span></p>
                                                 </div>
-                                                <div  id="condanation" class="form-group row">
-                                                    <p class="col-md-6 control-label labdetail"><span class="">Filière : </span> </p>
-                                                        <p class="col-md-6" >
-                                                        <span class="valdetail">
-                                                        @empty($projet->filiere)
-                                                                            Informations non disponible
-                                                        @endempty
-                                                             {{getlibelle($projet->filiere)}}
-                                                    </span></p>
-                                                </div>
-                                                <div  id="condanation" class="form-group row">
-                                                    <p class="col-md-6 control-label labdetail"><span class="">Maillon : </span> </p>
-                                                        <p class="col-md-6" >
-                                                        <span class="valdetail">
-                                                        @empty($projet->maillon)
-                                                                Informations non disponible
-                                                                            @endempty
-                                                             {{getlibelle($projet->maillon)}}
-                                                    </span></p>
-                                                </div>
+                                               
+                                                
 
                                                 <div  id="condanation" class="form-group row">
                                                     <p class="col-md-6 control-label labdetail"><span class="">Région : </span> </p>
@@ -393,10 +403,19 @@
                                                              {{getlibelle($projet->secteur_village )}}
                                                     </span></p>
                                                 </div>
-
-                                                <div  id="condanation" class="form-group">
-                                                    <p class="col-md-6 control-label labdetail"><span class="">Description du projet : </span> </p>
+                                                <div  id="condanation" class="form-group row">
+                                                    <p class="col-md-6 control-label labdetail"><span class="">Phase actuelle : </span> </p>
                                                         <p class="col-md-6" >
+                                                        <span class="valdetail">
+                                                        @empty($projet->phase_actuelle_projet)
+                                                                Informations non disponible
+                                                                            @endempty
+                                                             {{getlibelle($projet->phase_actuelle_projet)}}
+                                                    </span></p>
+                                                </div>
+                                                <div  id="condanation" class="form-group row">
+                                                    <p class="col-md-4 control-label labdetail"><span class="">Description du projet : </span> </p>
+                                                        <p class="col-md-8" >
                                                         <span class="valdetail">
                                                         @empty($projet->description_projet)
                                                                 Informations non disponible
@@ -404,82 +423,85 @@
                                                         {{ $projet->description_projet }}
                                                     </span></p>
                                                 </div>
-                                                <div  id="condanation" class="form-group">
-                                                    <p class="col-md-6 control-label labdetail"><span class="">Resultats attendus : </span> </p>
-                                                        <p class="col-md-6" >
+                                                <div  id="condanation" class="form-group row">
+                                                    <p class="col-md-4 control-label labdetail"><span class="">Génèse du projet : </span> </p>
+                                                        <p class="col-md-8" >
                                                         <span class="valdetail">
-                                                        @empty($projet->resultat_attendu )
+                                                        @empty($projet->genese_projet )
                                                                 Informations non disponible
                                                             @endempty
-                                                        {{ $projet->resultat_attendu  }}
+                                                        {{ $projet->genese_projet  }}
                                                     </span></p>
                                                 </div>
                                             </div>
                                             <div class="col-md-6 ">
                                                 <div  id="condanation" class="form-group row">
-                                                    <p class="col-md-4 control-label labdetail"><span class="">Produits/services : </span> </p>
+                                                    <p class="col-md-4 control-label labdetail"><span class="">Technologie utilisés : </span> </p>
                                                         <p class="col-md-8" >
                                                         <span class="valdetail">
-                                                        @empty($projet->produit_service)
-                                                                            Informations non disponible
+                                                        @empty($projet->technologie_utilise)
+                                                                    Informations non disponible
                                                           @endempty
-                                                             {{$projet->produit_service}}
+                                                             {{$projet->technologie_utilise}}
                                                     </span></p>
                                                 </div>
                                                 <div  id="condanation" class="form-group row">
-                                                    <p class="col-md-4 control-label labdetail"><span class="">Clients : </span> </p>
+                                                    <p class="col-md-4 control-label labdetail"><span class="">Coût du projet : </span> </p>
                                                         <p class="col-md-8" >
                                                         <span class="valdetail">
-                                                        @empty($projet->clients)
-                                                                            Informations non disponible
-                                                                            @endempty
-                                                             {{$projet->clients}}
+                                                       {{format_prix($projet->evaluation_financieres->sum('cout')) }} Fcfa
                                                     </span></p>
                                                 </div>
                                                 <div  id="condanation" class="form-group row">
-                                                    <p class="col-md-4 control-label labdetail"><span class="">Conccurence : </span> </p>
+                                                    <p class="col-md-4 control-label labdetail"><span class="">Fond Propre : </span> </p>
                                                         <p class="col-md-8" >
                                                         <span class="valdetail">
-                                                        @empty($projet->concurrence)
-                                                                            Informations non disponible
-                                                                            @endempty
-                                                             {{$projet->concurrence}}
+                                                       {{format_prix($projet->evaluation_financieres->sum('fond_propre')) }} Fcfa
                                                     </span></p>
                                                 </div>
                                                 <div  id="condanation" class="form-group row">
-                                                    <p class="col-md-4 control-label labdetail"><span class="">Fournisseurs : </span> </p>
+                                                    <p class="col-md-4 control-label labdetail"><span class="">Subvention demandée : </span> </p>
                                                         <p class="col-md-8" >
                                                         <span class="valdetail">
-                                                        @empty($projet->founisseurs )
-                                                                            Informations non disponible
-                                                                            @endempty
-                                                             {{$projet->founisseurs }}
+                                                       {{format_prix($projet->evaluation_financieres->sum('subvention_montant')) }} Fcfa
                                                     </span></p>
                                                 </div>
                                                 <div  id="condanation" class="form-group row">
-                                                    <p class="col-md-4 control-label labdetail"><span class="">Impacts : </span> </p>
+                                                    <p class="col-md-4 control-label labdetail"><span class="">Emprunt : </span> </p>
                                                         <p class="col-md-8" >
                                                         <span class="valdetail">
-                                                        @empty($projet->impacts )
-                                                                 Informations non disponible
-                                                                            @endempty
-                                                             {{$projet->impacts }}
+                                                       {{format_prix($projet->evaluation_financieres->sum('emprunt')) }} Fcfa
                                                     </span></p>
                                                 </div>
                                                 <div  id="condanation" class="form-group row">
-                                                    <p class="col-md-4 control-label labdetail"><span class="">Risques et difficultés : </span> </p>
+                                                    <p class="col-md-4 control-label labdetail"><span class="">Chiffre d'affaire prévisionnel : </span> </p>
                                                         <p class="col-md-8" >
                                                         <span class="valdetail">
-                                                        @empty($projet->risques_difficultes)
-                                                                            Informations non disponible
-                                                                            @endempty
-                                                             {{$projet->risques_difficultes}}
+                                                       {{format_prix(return_chiffre_daffaire($projet->id)) }} Fcfa
                                                     </span></p>
                                                 </div>
+                                                
+                                
 
 
                                             </div>
-                                            <hr>
+                                           
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                                <p>Les phases du projet</p>
+                                                <table class="table table-vcenter table-condensed table-bordered">
+                                                    <tr>
+                                                        <th>Phases</th>
+                                                        <th>Statut </th>
+                                                    </tr>
+                                                    @foreach ($projet->phases as $phase )
+                                                        <tr>
+                                                            <td>{{ getlibelle($phase->phase) }}</td>
+                                                            <td>{{ $phase->statut }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                </table>
                                         </div>
 
                                     </div>
@@ -490,37 +512,59 @@
                                         <table class="table table-condensed table-bordered" style="text-align: center">
                                         <thead style="text-align: center !important">
                                                 <tr>
+                                                    <th style="text-align: center; width:5%">Catégorie</th>
                                                     <th style="text-align: center; width:5%">Activités</th>
                                                     <th style="text-align: center; width:5%">Coût</th>
                                                     <th style="text-align: center; width:5%">Montant promoteur</th>
                                                     <th style="text-align: center; width:5%">Montant crédit</th>
                                                     <th style="text-align: center; width:5%">Montant subvention</th>
-                                                    <th style="text-align: center; width:5%">Montant total</th>
                                                 </tr>
                                         </thead>
                                         <tbody id="tbadys">
                                     @foreach($projet->evaluation_financieres as $key => $evaluation_financiere)
                                     <tr>
                                                 <td>
-                                                    {{$evaluation_financiere->activite}}
+                                                    @if($evaluation_financiere->categorie==1)
+                                                        Investissemment
+                                                    @else
+                                                        Fonds de roulement
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{$evaluation_financiere->designation}}
                                                 </td>
                                                 <td>
                                                     {{format_prix($evaluation_financiere->cout)}}
                                                 </td>
                                                 <td>
-                                                    {{format_prix($evaluation_financiere->promoteur_montant )}}
+                                                    {{format_prix($evaluation_financiere->fond_propre )}}
                                                 </td>
                                                 <td>
-                                                    {{format_prix($evaluation_financiere->credit_montant )}}
+                                                    {{format_prix($evaluation_financiere->emprunt )}}
                                                 </td>
                                                 <td>
                                                     {{format_prix($evaluation_financiere->subvention_montant  )}}
                                                 </td>
-                                                <td>
-                                                    {{format_prix($evaluation_financiere->total_projet   )}}
-                                                </td>
+                                                
                                             </tr>
+                                            
                                         @endforeach
+                                        <tr style="font-weight: 600">
+                                            <td></td>
+                                            <td></td>
+                                            <td>
+                                                {{format_prix($projet->evaluation_financieres->sum('cout'))}}
+                                            </td>
+                                            <td>
+                                                {{format_prix($projet->evaluation_financieres->sum('fond_propre') )}}
+                                            </td>
+                                            <td>
+                                                {{format_prix($projet->evaluation_financieres->sum('emprunt') )}}
+                                            </td>
+                                            <td>
+                                                {{format_prix($projet->evaluation_financieres->sum('subvention_montant') )}}
+                                            </td>
+                                        </tr>
                                     </tbody>
                                     </table>
                  </div>
@@ -534,14 +578,9 @@
                         <tr>
                             <th style="text-align: center; width:5%">Produits</th>
                             <th style="text-align: center; width:5%">Unité de mesure</th>
-                            <th style="text-align: center; width:5%">Quantité année 1</th>
-                            <th style="text-align: center; width:5%">Cout unitaire année 1</th>
-                            <th style="text-align: center; width:5%">Quantité année 2</th>
-                            <th style="text-align: center; width:5%">Coût unitaire année 2</th>
-                            <th style="text-align: center; width:5%">Quantité année 3</th>
-                            <th style="text-align: center; width:5%">Coût unitaire année 3</th>
-
-
+                            <th style="text-align: center; width:5%">Quantité</th>
+                            <th style="text-align: center; width:5%">Cout unitaire</th>
+                            <th style="text-align: center; width:5%">Cout Total</th>
                         </tr>
                 </thead>
                 <tbody id="tbadys">
@@ -554,23 +593,15 @@
                             {{$chiffre_daffaire_previsionnel->unite_de_mesure}}
                         </td>
                         <td>
-                            {{$chiffre_daffaire_previsionnel->quantite_an1 }}
+                            {{$chiffre_daffaire_previsionnel->quantite}}
                         </td>
                         <td>
-                            {{format_prix($chiffre_daffaire_previsionnel->cu_an1  )}}
+                            {{format_prix($chiffre_daffaire_previsionnel->cout_unit  )}}
                         </td>
                         <td>
-                            {{$chiffre_daffaire_previsionnel->quantite_an2 }}
+                            {{format_prix($chiffre_daffaire_previsionnel->cout_unit * $chiffre_daffaire_previsionnel->quantite)}}
                         </td>
-                        <td>
-                            {{format_prix($chiffre_daffaire_previsionnel->cu_an2) }}
-                        </td>
-                        <td>
-                            {{$chiffre_daffaire_previsionnel->quantite_an3}}
-                        </td>
-                        <td>
-                            {{format_prix($chiffre_daffaire_previsionnel->cu_an3  )}}
-                        </td>
+                       
 
                     </tr>
                 @endforeach

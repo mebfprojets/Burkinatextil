@@ -5,7 +5,7 @@
         <div class="sidebar-content">
             <!-- Brand -->
             <a href="index.html" class="sidebar-brand">
-                <img src={{ asset("assets/img/PReCA-logo.PNG")  }} width=100% height=100%>
+                <img src={{ asset("assets/img/logo-burkina.PNG")  }} width=100% height=100%>
             </a>
             <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                 <div class="sidebar-user-avatar">

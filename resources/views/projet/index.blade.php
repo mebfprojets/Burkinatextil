@@ -13,19 +13,17 @@
             <thead>
                 <tr>
                     <th class="text-center">Numéro</th>
-                    <th class="text-center">Nom & Prénom</th>
+                    <th class="text-center">Nom & Prénom</th>^
+                    <th class="text-center">Nationalité</th>
+                    <th class="text-center">Pays de résidence</th>
+                    <th class="text-center">Niveau d'instruction</th>
                     <th class="text-center">Région du promoteur</th>
                     <th class="text-center">Contacts</th>
                     <th class="text-center">Structure représentée</th>
                     <th class="text-center">Titre du projet</th>
-                    <th class="text-center">Région du projet</th>
-                    <th class="text-center">Filière du projet</th>
-                    {{-- <th class="text-center">Description</th>
-                    <th class="text-center">Objectifs</th>
-                    <th class="text-center">Resultats attendus</th>
-                    <th class="text-center">Produits</th>
-                    <th class="text-center">Clients</th>
-                    <th class="text-center" >Conccurences</th> --}}
+                    <th class="text-center">Zone du projet</th>
+                    <th class="text-center">Phase actuelle du projet</th>
+                    <th class="text-center">Description</th>
                     <th class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -41,10 +39,12 @@
                         <td class="text-center" style="width: 10%">{{ $i }}</td>
 
                         <td class="text-center">{{ $projet->porteur->nom }} {{ $projet->porteur->prenom }} </td>
+                        <td class="text-center">{{ getlibelle($projet->porteur->nationalite) }}  </td>
+                        <td class="text-center">{{ getlibelle($projet->porteur->pays_de_residence) }}  </td>
+                        <td class="text-center">{{ getlibelle($projet->porteur->niveau_instruction) }}  </td>
                         <td class="text-center">{{ getlibelle($projet->porteur->region_residence) }} </td>
                         <td class="text-center">{{ $projet->porteur->telephone }}/ {{ $projet->porteur->telephone_secondaire }}  </td>
                         <td class="text-center">
-
                         @if($projet->porteur->type_personne=='M')
                         {{ $projet->porteur->represente->raison_sociale }}
                         @else
@@ -53,14 +53,10 @@
                         </td>
 
                         <td class="text-center">{{ $projet->titre }}</td>
-                        <td class="text-center">{{ getlibelle($projet->region)  }}</td>
-                        <td class="text-center">{{ getlibelle($projet->filiere)  }}</td>
-                        {{-- <td class="text-center">{{ $projet->description_projet }}</td>
-                        <td class="text-center">{{ $projet->objectif }}</td>
-                        <td class="text-center">{{ $projet->resultat_attendu  }}</td>
-                        <td class="text-center">{{ $projet->produit_service  }} </td>
-                        <td class="text-center">{{ $projet->clients }} </td>
-                        <td class="text-center">{{ $projet->concurrence }}</td> --}}
+                        <td class="text-center">{{ getlibelle($projet->region)  }}/{{ getlibelle($projet->province)  }}/ {{ getlibelle($projet->commune)  }}</td>
+                        <td class="text-center">{{ getlibelle($projet->phase_actuelle_projet)  }}</td>
+                        <td class="text-center">{{ $projet->description_projet }}</td>
+                        
                         <td class="text-center">
                             <div class="btn-group">
                                 <a href="{{ route("projet.show", $projet) }}" data-toggle="tooltip" title="afficher les details du projets" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>

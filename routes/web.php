@@ -17,13 +17,8 @@ Route::get('/colonie/index', function () {
 
 
 
-
-
-
 //Route Pour les saisies
 Route::get('/saisie', [InscrireController::class, 'saisie']);
-
-
 Route::get('/', [InscrireController::class, 'index'])->name('accueil');
 Route::resource('personne', PersonneController::class);
 Route::get('inscrire/create', [InscrireController::class, 'create'])->name('inscrire');
@@ -31,7 +26,6 @@ Route::get('inscrire/projet/create/{code_promoteur}', [InscrireController::class
 Route::get('/poursuivre/inscription', [InscrireController::class, 'createpoursuivre'])->name('poursuivre.inscription');
 Route::post('/store/poursuivre', [InscrireController::class, 'poursuivre'])->name('poursuivre.inscrire');
 Route::get("recepisse/print/{code}",[InscrireController::class,'genererRecepise'])->name("generer.recepisse");
- 
 // Route pour récupérer les données du formulaire physique
 Route::post('/store', [PersonnePhysiqueController::class, 'store'])->name('personne_physique.create');
 //  Route pour récupérer les données du formulaire morale
